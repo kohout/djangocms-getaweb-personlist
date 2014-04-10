@@ -1,0 +1,39 @@
+<div class="team full-width columns">
+{% include "cms/plugins/personlist/team.html" %}
+<section class="feature-boxes medium-col-space left-icon-box small-icon">
+  <div class="row">
+    {% for person in persons %}
+      <div class="width-one-third align-left">
+        <article>
+          <span>
+            <i class="fa fa-user"></i>
+          </span>
+          <div>
+            <h5>{{ person.name }}</h5>
+            {% if person.position %}
+              <div class="sub">{{ person.position }}</div>
+            {% endif %}
+            {% if person.abstract %}
+              <p>{{ person.abstract }}</p>
+            {% endif %}
+            <ul class="profile-links clearfix">
+              {% if person.email %}
+                <li>
+                  <a href="mailto:{{ person.email }}">
+                    {{ person.email }}
+                  </a>&nbsp;
+                </li>
+              {% endif %}
+              {% if person.phone %}
+                <li>
+                  {{ person.phone }}
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+</div>

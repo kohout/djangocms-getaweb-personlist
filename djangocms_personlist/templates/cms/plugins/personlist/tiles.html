@@ -1,0 +1,34 @@
+{% load cmspersonlist %}
+<section class="full-width columns team four-cols">
+  {% include "cms/plugins/personlist/team.html" %}
+  <div class="row">
+    {% for person in persons %}
+      <div class="one-fourth columns">
+        <article>
+          {{ person|image:'normal' }}
+          <h6>{{ person.name }}</h6>
+          {% if person.position %}
+            <div class="sub">{{ person.position }}</div>
+          {% endif %}
+          {% if person.abstract %}
+            <p>{{ person.abstract }}</p>
+          {% endif %}
+          <ul class="profile-links clearfix">
+            {% if person.email %}
+              <li>
+                <a href="mailto:{{ person.email }}">
+                  {{ person.email }}
+                </a>&nbsp;
+              </li>
+            {% endif %}
+            {% if person.phone %}
+              <li>
+                {{ person.phone }}
+              </li>
+            {% endif %}
+          </ul>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+</section>
