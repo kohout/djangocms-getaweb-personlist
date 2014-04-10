@@ -26,7 +26,7 @@ class ImageMixin(models.Model):
     image = ThumbnailerImageField(
         blank=True,
         null=True,
-        upload_to='news_image/',
+        upload_to='cms_personlist/',
         verbose_name=_(u'Image'))
 
     image_width = models.PositiveSmallIntegerField(
