@@ -1,0 +1,12 @@
+{% extends "layouts/default.html" %}
+{% load cms_tags %}
+
+{% block whole_content %}
+    <h1>Teams</h1>
+    {% for team in object_list %}
+        <div class="team-list">
+            <p><b>{{ team.name }}</b><br />
+            {{ team.description }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

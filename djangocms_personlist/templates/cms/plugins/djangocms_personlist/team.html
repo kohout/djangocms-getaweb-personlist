@@ -1,0 +1,8 @@
+{% load cmspersonlist %}
+<h2>{{ team.name }}</h2>
+{% if team.image %}
+  <div class="post-media item-picture">
+    {{ team|image:'fullscreen' }}
+  </div>
+  <hr>
+{% endif %}
