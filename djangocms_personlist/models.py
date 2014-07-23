@@ -22,11 +22,13 @@ DJANGOCMS_PERSONLIST_TEMPLATES = (
 if hasattr(settings, 'DJANGOCMS_PERSONLST_TEMPLATES'):
     DJANGOCMS_PERSONLIST_TEMPLATES = settings.DJANGOCMS_PERSONLIST_TEMPLATES
 
+
 class ImageMixin(models.Model):
     image = ThumbnailerImageField(
         blank=True,
         null=True,
         upload_to='cms_personlist/',
+        max_length=255,
         verbose_name=_(u'Image'))
 
     image_width = models.PositiveSmallIntegerField(
@@ -70,14 +72,22 @@ class ImageMixin(models.Model):
     class Meta:
         abstract = True
 
+
 class Team(ImageMixin, models.Model):
     parent = models.ForeignKey(
         'self',
         blank=True,
         null=True)
+
     name = models.CharField(
         max_length=30,
         verbose_name=_(u'Team Name'))
+
+    description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=_(u'Description')
+    )
 
     def get_image_title(self):
         return self.name
@@ -118,6 +128,7 @@ class Membership(models.Model):
     team = models.ForeignKey(Team)
     person = models.ForeignKey('Person')
 
+
 class Person(ImageMixin, models.Model):
     teams = models.ManyToManyField(
         Team,
@@ -132,18 +143,33 @@ class Person(ImageMixin, models.Model):
     first_name = models.CharField(
         max_length=30,
         verbose_name=_(u'First name'))
+    middle_name = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        verbose_name=_(u'Middle name'))
     last_name = models.CharField(
         max_length=30,
         verbose_name=_(u'Last name'))
+    alias = models.CharField(
+        max_length=30,
+        null=True,
+        blank=True,
+        verbose_name=_(u'Alias'))
     abstract = models.TextField(
         null=True,
         blank=True,
         verbose_name=_(u'Abstract'))
     position = models.CharField(
-        max_length=150,
+        max_length=200,
         null=True,
         blank=True,
         verbose_name=_(u'Position'))
+    city = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        verbose_name=_(u'City'))
     phone = models.CharField(
         max_length=30,
         null=True,
@@ -153,11 +179,25 @@ class Person(ImageMixin, models.Model):
         null=True,
         blank=True,
         verbose_name=_(u'Email'))
+    www = models.URLField(
+        null=True,
+        blank=True,
+        verbose_name=_(u'WWW'))
     gender = models.CharField(
         max_length=10,
         default='female',
         choices=GENDER_CHOICES,
         verbose_name=_(u'Gender'))
+    hobbies = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_(u'Hobbies')
+    )
+    quote = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_(u'Quote')
+    )
 
     def get_image_title(self):
         return self.name
