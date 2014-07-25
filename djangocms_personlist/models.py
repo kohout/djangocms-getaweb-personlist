@@ -127,6 +127,14 @@ class PersonListPluginModel(CMSPlugin):
 class Membership(models.Model):
     team = models.ForeignKey(Team)
     person = models.ForeignKey('Person')
+    ordering = models.PositiveIntegerField(
+        default=0,
+        verbose_name=_(u'Ordering'))
+
+    class Meta:
+        ordering = ('ordering', )
+        verbose_name = _(u'Membership')
+        verbose_name = _(u'Memberships')
 
 
 class Person(ImageMixin, models.Model):
@@ -227,3 +235,46 @@ class Person(ImageMixin, models.Model):
         ordering = ('last_name', )
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
+
+class PersonImage(ImageMixin, models.Model):
+
+    title = models.CharField(
+        blank=True,
+        default='',
+        max_length=150,
+        verbose_name=_(u'Image Title'))
+
+    alt = models.CharField(
+        blank=True,
+        default='',
+        max_length=150,
+        verbose_name=_(u'Alternative Image Text'))
+
+    ordering = models.PositiveIntegerField(
+        verbose_name=_(u'Ordering'))
+
+    person = models.ForeignKey(Person,
+        verbose_name=_(u'Person'))
+
+    def get_title(self):
+        if self.title:
+            return self.title
+        return self.person.title
+
+    def get_alt(self):
+        if self.alt:
+            return self.alt
+        return u'Picture %s' % (self.ordering + 1)
+
+    def __unicode__(self):
+        if self.title:
+            return self.title
+        if self.alt:
+            return self.alt
+        return _(u'Image #%s') % self.ordering
+
+    class Meta:
+        ordering = ['ordering']
+        verbose_name = _(u'Person Image')
+        verbose_name_plural = _(u'Person Images')
+

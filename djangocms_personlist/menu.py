@@ -14,7 +14,7 @@ class TeamsMenu(CMSAttachMenu):
         if not request.current_page:
             return nodes
 
-        for team in Team.objects.all().order_by('title'):
+        for team in Team.objects.all().order_by('name'):
             node = NavigationNode(
                 team.name,
                 team.get_absolute_url(),
