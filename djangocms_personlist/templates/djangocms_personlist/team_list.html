@@ -1,8 +1,8 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/sidebar_left.html" %}
 {% load cms_tags %}
 
 {% block whole_content %}
-    <h1>Teams</h1>
+    <h1>Teams-List</h1>
     {% for team in object_list %}
         <div class="team-list">
             <p><b>{{ team.name }}</b><br />

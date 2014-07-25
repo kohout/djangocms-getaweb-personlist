@@ -99,7 +99,7 @@ class Team(ImageMixin, models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('personlist-team', args=[self.pk])
+        return reverse('team-list', args=[self.pk])
 
 try:
     mptt.register(Team)
@@ -215,9 +215,14 @@ class Person(ImageMixin, models.Model):
 
     def get_image_fallback(self):
         if self.gender == 'female':
-            return u'defaults/female.jpg'
+            return u'defaults/female.png'
         else:
-            return u'defaults/male.jpg'
+            return u'defaults/male.png'
+
+#    def get_absolute_url(self):
+#        view_name = '%s:news-detail' % self.target_page.application_namespace
+#        return reverse(view_name, kwargs={'slug': self.slug})
+
 
     @property
     def name(self):

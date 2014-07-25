@@ -1,0 +1,6 @@
+<h1>Filter</h1>
+<div class="list-group filter-group">
+{% for filter in filter_list %}
+    <a href="" class="list-group-item {{ filter_tag }}-{{ filter.pk }} active"><i class="fa fa-check-square-o fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
+{% endfor %}
+</div>
