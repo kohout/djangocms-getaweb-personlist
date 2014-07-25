@@ -20,8 +20,14 @@ class TeamListView(ListView):
     """
     A filtered list of the personlist items
     """
-    model = Team
+    model = Person
     template_name = 'djangocms_personlist/team_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamListView, self).get_context_data(**kwargs)
+        context['filter_list'] = Team.objects.all()
+        context['pk'] = self.kwargs['pk']
+        return context
 
 
 class PersonDetailView(DetailView):

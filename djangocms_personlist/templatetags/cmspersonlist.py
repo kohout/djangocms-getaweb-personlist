@@ -33,3 +33,9 @@ def image_url(value, image_format):
 def persondetail_url(context, pk):
     return reverse(context['request'], 'person-detail', kwargs={
         'pk': pk})
+
+
+@register.simple_tag(takes_context=True)
+def filter_url(context, tag, pk):
+    return reverse(context['request'], tag+'-list', kwargs={
+        'pk': pk})

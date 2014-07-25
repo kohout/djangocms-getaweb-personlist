@@ -1,6 +1,15 @@
+{% load cmspersonlist %}
+
 <h1>Filter</h1>
 <div class="list-group filter-group">
-{% for filter in filter_list %}
-    <a href="" class="list-group-item {{ filter_tag }}-{{ filter.pk }} active"><i class="fa fa-check-square-o fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
-{% endfor %}
+{% if pk %}
+    {% for filter in filter_list %}
+        <a href="{% filter_url tag=filter_tag pk=filter.pk %}" class="list-group-item {{ filter_tag }}-{{ filter.pk }} {% if pk == filter.pk %}active{% endif %}">
+            <i class="fa {% if pk == filter.pk %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
+    {% endfor %}
+{% else %}
+    {% for filter in filter_list %}
+        <a href="{% filter_url tag=filter_tag pk=filter.pk %}" class="list-group-item {{ filter_tag }}-{{ filter.pk }} active"><i class="fa fa-check-square-o fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
+    {% endfor %}
+{% endif %}
 </div>
