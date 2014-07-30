@@ -134,7 +134,7 @@ class Membership(models.Model):
     class Meta:
         ordering = ('ordering', )
         verbose_name = _(u'Membership')
-        verbose_name = _(u'Memberships')
+        verbose_name_plural = _(u'Memberships')
 
 
 class Person(ImageMixin, models.Model):

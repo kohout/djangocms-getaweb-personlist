@@ -37,4 +37,12 @@ class PersonDetailView(DetailView):
     model = Person
     template_name = 'djangocms_personlist/person_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(PersonDetailView, self).get_context_data(**kwargs)
+        if (self.request.is_ajax() == True):
+            context['detail_template'] = 'layouts/modal.html'
+        else:
+            context['detail_template'] = 'layouts/default.html'
+        return context
+
 

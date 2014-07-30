@@ -21,31 +21,48 @@
     </div>
     <div id="masonry-container">
         {% for person in object_list %}
-        <div class="masonry-item one-third{% for team in person.teams.all %} team-{{ team.pk }}{% endfor %}">
-            <div class="masonry-item-image">
-                <a href="{% persondetail_url pk=person.pk %}">
-                    <img src="
-                    {% if person.image %}
-                        {{ person.image|thumbnail_url:'masonry' }}
-                    {% else %}
-                        {{ person.get_image_fallback|thumbnail_url:'masonry' }}
-                    {% endif %}" alt="{{ person.name }}">
-                    <div class="masonry-item-title">{{ person.name }}</div>
-                </a>
-            </div>
+            <!-- Masonry Item -->
+            <div class="masonry-item one-third{% for team in person.teams.all %} team-{{ team.pk }}{% endfor %}">
+                <div class="masonry-item-image">
+                    <a href="{% persondetail_url pk=person.pk %}" data-toggle="modal" data-target="#modal-window">
+                        <img src="
+                        {% if person.image %}
+                            {{ person.image|thumbnail_url:'masonry' }}
+                        {% else %}
+                            {{ person.get_image_fallback|thumbnail_url:'masonry' }}
+                        {% endif %}" alt="{{ person.name }}">
+                        <div class="masonry-item-title">{{ person.name }}</div>
+                    </a>
+                </div>
 
-            <div class="masonry-item-description">
-                {% if person.teams.all.count > 0 %}
-                    Team{% if person.teams.all.count > 1 %}s{% endif %}:
-                    {% for team in person.teams.all %}
-                        {{ team.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}<br />{% endif %}
-                Position: {{ person.position }}
+                <div class="masonry-item-description">
+                    {% if person.teams.all.count > 0 %}
+                        Team{% if person.teams.all.count > 1 %}s{% endif %}:
+                        {% for team in person.teams.all %}
+                            {{ team.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}<br />{% endif %}
+                    Position: {{ person.position }}
+                </div>
             </div>
-        </div>
     {% endfor %}
     </div>
     <div id="masonry-no-content">
         <i class="fa fa-meh-o fa-5x fa-fw"></i> <span>Keine Inhalte gefunden!</span>
+    </div>
+
+    <!-- Modal Item -->
+    <div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-center modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h1 class="modal-title" id="modal-label"></h1>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
