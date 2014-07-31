@@ -1,5 +1,5 @@
 {% extends detail_template %}
-{% load cms_tags thumbnail %}
+{% load cms_tags thumbnail cmspersonlist %}
 
 {% block whole_content %}
     <h1>{{ object.name }}{% if object.alias %} - alias "{{ object.alias }}"{% endif %}</h1>
@@ -25,6 +25,12 @@
 
     {% for personimage in object.personimage_set.all %}
         <img class="modal-footer-image" src="{{ personimage.image|thumbnail_url:'normal' }}" alt="" />
+    {% endfor %}
+
+    <div class="clearfix" style="margin-bottom:10px"></div>
+
+    {% for team in object.teams.all %}
+        <a href="{% filter_url tag='team' pk=team.pk %}">Zurück zum Team "{{ team.name }}"</a><br />
     {% endfor %}
 
 {% endblock %}
