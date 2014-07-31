@@ -30,6 +30,11 @@ def image_url(value, image_format):
 
 
 @register.simple_tag(takes_context=True)
+def teamindex_url(context):
+    return reverse(context['request'], 'team-index')
+
+
+@register.simple_tag(takes_context=True)
 def persondetail_url(context, pk):
     return reverse(context['request'], 'person-detail', kwargs={
         'pk': pk})

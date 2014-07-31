@@ -1,6 +1,10 @@
 {% extends "layouts/sidebar_left.html" %}
 {% load cms_tags sekizai_tags thumbnail cmspersonlist %}
 
+{% block head %}
+    <link href="{% teamindex_url %}" rel="canonical" />
+{% endblock %}
+
 {% block sidebar %}
     {% include "djangocms_personlist/team_filter.html" with filter_tag='team' set_filter=pk%}
 {% endblock %}
