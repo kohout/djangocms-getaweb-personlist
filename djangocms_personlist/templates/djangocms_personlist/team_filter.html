@@ -14,4 +14,6 @@
            href="{% filter_url tag=filter_tag pk=filter.pk %}" class="list-group-item {{ filter_tag }}-{{ filter.pk }} active"><i class="fa fa-check-square-o fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
     {% endfor %}
 {% endif %}
+<a href="{% teamindex_url %}" class="filter-all btn btn-primary"><i class="fa fa-check-square-o fa-fw"></i>Alle</a>
+<a href="{% teamindex_url %}" class="filter-none btn btn-primary"><i class="fa fa-square-o fa-fw"></i>Keine</a>
 </div>
