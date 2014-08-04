@@ -1,4 +1,5 @@
-{% extends detail_template %}
+{% extends request.is_ajax|yesno:'layouts/modal.html,layouts/base.html' %}
+
 {% load cms_tags thumbnail cmspersonlist %}
 
 {% block whole_content %}
