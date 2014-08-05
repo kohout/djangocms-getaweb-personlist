@@ -5,7 +5,7 @@
 
 {% for team in teams %}
     <a data-toggle="tooltip" data-placement="left" title="{{ team.description }}"
-       href="{% specificteam_url team.pk %}" class="list-group-item {{ filter_tag }}-{{ team.pk }} {% if team.pk|stringformat:"s" in filter_teams or show_all %}active{% endif %}">
+       href="{% specificteam_url team.pk %}" class="list-group-item tooltip-toggle {{ filter_tag }}-{{ team.pk }} {% if team.pk|stringformat:"s" in filter_teams or show_all %}active{% endif %}">
         <i class="fa {% if team.pk|stringformat:"s" in filter_teams or show_all %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ team.name }}</span></a>
 {% endfor %}
 
