@@ -41,6 +41,12 @@ def persondetail_url(context, pk):
 
 
 @register.simple_tag(takes_context=True)
-def filter_url(context, tag, pk):
-    return reverse(context['request'], tag+'-list', kwargs={
-        'pk': pk})
+def specificteam_url(context, get):
+    return "%s?team=%s" % (reverse(context['request'], 'team-index'), get)
+
+@register.simple_tag(takes_context=True)
+def page_pagination(context, team=None, page=1):
+    if team:
+        return "%s?team=%s&page=%s" % (reverse(context['request'], 'team-index'), team, page)
+    else:
+        return "%s?page=%s" % (reverse(context['request'], 'team-index'), page)

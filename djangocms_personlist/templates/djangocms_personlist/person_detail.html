@@ -1,8 +1,16 @@
 {% extends request.is_ajax|yesno:'layouts/modal.html,layouts/base.html' %}
 
-{% load cms_tags thumbnail cmspersonlist %}
+{% load cms_tags thumbnail cmspersonlist sekizai_tags %}
 
 {% block whole_content %}
+    {% addtoblock "css" %}
+        <link href="{{ STATIC_URL }}css/lightbox.css" rel="stylesheet" />
+    {% endaddtoblock %}
+
+    {% addtoblock "js" %}
+        <script src="{{ STATIC_URL }}js/lightbox.min.js"></script>
+    {% endaddtoblock %}
+
     <h1>{{ object.name }}{% if object.alias %} - alias "{{ object.alias }}"{% endif %}</h1>
 
     {% if object.image %}
@@ -25,13 +33,15 @@
     <div class="clearfix"></div>
 
     {% for personimage in object.personimage_set.all %}
-        <img class="modal-footer-image" src="{{ personimage.image|thumbnail_url:'normal' }}" alt="" />
+        <a href="{{ MEDIA_URL }}{{ personimage.image }}" data-lightbox="{{ object.name }}">
+            <img class="modal-footer-image" src="{{ personimage.image|thumbnail_url:'normal' }}" alt="{{ object.name }}" />
+        </a>
     {% endfor %}
 
     <div class="clearfix" style="margin-bottom:10px"></div>
 
     {% for team in object.teams.all %}
-        <a href="{% filter_url tag='team' pk=team.pk %}">Zurück zum Team "{{ team.name }}"</a><br />
+        <a href="{% specificteam_url team.pk %}">Zurück zum Team "{{ team.name }}"</a><br />
     {% endfor %}
 
 {% endblock %}

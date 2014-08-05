@@ -2,18 +2,13 @@
 
 <h1>Filter</h1>
 <div class="list-group filter-group">
-{% if pk %}
-    {% for filter in filter_list %}
-        <a data-toggle="tooltip" data-placement="left" title="{{ filter.description }}"
-           href="{% filter_url tag=filter_tag pk=filter.pk %}" class="list-group-item {{ filter_tag }}-{{ filter.pk }} {% if pk == filter.pk|stringformat:"s" %}active{% endif %}">
-            <i class="fa {% if pk == filter.pk|stringformat:"s" %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
-    {% endfor %}
-{% else %}
-    {% for filter in filter_list %}
-        <a data-toggle="tooltip" data-placement="left" title="{{ filter.description }}"
-           href="{% filter_url tag=filter_tag pk=filter.pk %}" class="list-group-item {{ filter_tag }}-{{ filter.pk }} active"><i class="fa fa-check-square-o fa-fw"></i><span>&nbsp; {{ filter.name }}</span></a>
-    {% endfor %}
-{% endif %}
+
+{% for team in teams %}
+    <a data-toggle="tooltip" data-placement="left" title="{{ team.description }}"
+       href="{% specificteam_url team.pk %}" class="list-group-item {{ filter_tag }}-{{ team.pk }} {% if team.pk|stringformat:"s" in filter_teams or show_all %}active{% endif %}">
+        <i class="fa {% if team.pk|stringformat:"s" in filter_teams or show_all %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ team.name }}</span></a>
+{% endfor %}
+
 <a href="{% teamindex_url %}" class="filter-all btn btn-primary"><i class="fa fa-check-square-o fa-fw"></i>Alle</a>
 <a href="{% teamindex_url %}" class="filter-none btn btn-primary"><i class="fa fa-square-o fa-fw"></i>Keine</a>
 </div>
