@@ -7,7 +7,7 @@ from .menu import TeamsMenu
 class TeamApp(CMSApp):
     name = _('Team Module')
     urls = ['djangocms_personlist.urls']
-    app_name = 'cmsteam'
+    app_name = 'khw-team'
     menus = [TeamsMenu]
 
 apphook_pool.register(TeamApp)
