@@ -2,6 +2,7 @@ from menus.base import NavigationNode
 from menus.menu_pool import menu_pool
 from django.utils.translation import ugettext_lazy as _
 from cms.menu_bases import CMSAttachMenu
+from djangocms_personlist.resolvers import reverse
 from .models import Team
 
 
