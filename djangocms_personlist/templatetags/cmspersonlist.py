@@ -37,18 +37,21 @@ def teamindex_url(context, prefix=None, app_name=None):
 
 @register.simple_tag(takes_context=True)
 def persondetail_url(context, pk, prefix=None, app_name=None):
-    return reverse(context['request'], prefix, app_name, 'person-detail', kwargs={
-        'pk': pk})
+    return reverse(context['request'], prefix, app_name, 'person-detail',
+        kwargs={'pk': pk})
 
 
 @register.simple_tag(takes_context=True)
 def specificteam_url(context, get, prefix=None, app_name=None):
-    return "%s?team=%s" % (reverse(context['request'], prefix, app_name, 'team-index'), get)
+    return "%s?team=%s" % (reverse(context['request'], prefix, app_name,
+        'team-index'), get)
 
 
 @register.simple_tag(takes_context=True)
 def page_pagination(context, team=None, page=1, prefix=None, app_name=None):
     if team:
-        return "%s?team=%s&page=%s" % (reverse(context['request'], prefix, app_name, 'team-index'), team, page)
+        return "%s?team=%s&page=%s" % (reverse(context['request'], prefix,
+            app_name, 'team-index'), team, page)
     else:
-        return "%s?page=%s" % (reverse(context['request'], prefix, app_name, 'team-index'), page)
+        return "%s?page=%s" % (reverse(context['request'], prefix, app_name,
+            'team-index'), page)
