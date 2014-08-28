@@ -48,9 +48,10 @@ class MembershipInline(SortableInlineAdminMixin, admin.TabularInline):
 
 class PersonAdmin(PreviewMixin, admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'position', )
-    list_display = ('render_preview', 'first_name', 'last_name', 'position', )
+    list_display = ('render_preview', 'first_name', 'last_name', 'position', 'active')
     list_display_links = ('render_preview', 'first_name', 'last_name', )
     fields = (
+        ('active', ),
         ('first_name', 'last_name', ),
         ('alias', 'gender', ),
         ('position', 'image', ),

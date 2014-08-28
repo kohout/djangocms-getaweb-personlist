@@ -13,7 +13,7 @@ class PersonListPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context['instance'] = instance
         context['team'] = instance.selected_team
-        context['persons'] = instance.selected_team.team_person.all()
+        context['persons'] = instance.selected_team.team_person.filter(active=True)
         context['subtemplate'] = ''.join([BASE_TEMPLATE_PATH, instance.layout])
         return context
 

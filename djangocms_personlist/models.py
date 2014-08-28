@@ -138,6 +138,10 @@ class Membership(models.Model):
 
 
 class Person(ImageMixin, models.Model):
+    active = models.BooleanField(
+        default=True,
+        verbose_name=_(u'active'))
+
     teams = models.ManyToManyField(
         Team,
         through=Membership,
