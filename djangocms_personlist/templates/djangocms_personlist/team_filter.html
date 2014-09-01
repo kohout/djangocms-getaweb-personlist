@@ -5,10 +5,13 @@
 
 {% for team in teams %}
     <a data-toggle="tooltip" data-placement="left" title="{{ team.description }}"
-       href="{% specificteam_url team.pk %}" class="list-group-item tooltip-toggle {{ filter_tag }}-{{ team.pk }} {% if team.pk|stringformat:"s" in filter_teams or show_all %}active{% endif %}">
-        <i class="fa {% if team.pk|stringformat:"s" in filter_teams or show_all %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ team.name }}</span></a>
+       href="{% specificteam_url team.pk %}" class="list-group-item tooltip-toggle {% if team.pk|stringformat:"s" in filter_teams %}active{% endif %}">
+        <i class="fa {% if team.pk|stringformat:"s" in filter_teams %}fa-check-square-o{% else %}fa-square-o{% endif %} fa-fw"></i><span>&nbsp; {{ team.name }}</span></a>
 {% endfor %}
 
-<a href="{% teamindex_url %}" class="filter-all btn btn-secondary"><i class="fa fa-check-square-o fa-fw"></i>Alle</a>
-<a href="{% teamindex_url %}" class="filter-none btn btn-secondary"><i class="fa fa-square-o fa-fw"></i>Keine</a>
+{% comment %}<a href="{% teamindex_url %}" class="filter-all btn btn-secondary"><i class="fa fa-check-square-o fa-fw"></i>Alle</a>
+<a href="{% teamindex_url %}" class="filter-none btn btn-secondary"><i class="fa fa-square-o fa-fw"></i>Keine</a> {% endcomment %}
 </div>
+
+<a href="{% teamindex_url %}" class="filter-none btn btn-secondary btn-block"
+        style="{% if filter_teams %}display: block;{% endif %}">Filter aufheben</a>
