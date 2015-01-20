@@ -18,7 +18,7 @@ class TeamListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(TeamListView, self).get_context_data(**kwargs)
-        context['teams'] = Team.objects.all()
+        context['teams'] = Team.objects.filter(is_active=True)
         if self.request.GET.get('team'):
             filter_teams = self.request.GET.get('team')
             filter_teams = filter_teams.split(',')

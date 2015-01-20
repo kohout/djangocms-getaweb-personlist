@@ -62,11 +62,12 @@ class PersonAdmin(PreviewMixin, admin.ModelAdmin):
     inlines = [MembershipInline, PersonImageInline]
 
 class TeamAdmin(PreviewMixin, MPTTModelAdmin):
-    list_display = ('render_preview', 'name', )
+    list_display = ('is_active', 'render_preview', 'name', )
     list_display_links = ('render_preview', 'name', )
     readonly_fields = ('render_preview', )
     inlines = [MembershipInline]
     fields = (
+        ('is_active', ),
         ('name', 'parent', ),
         ('image', ),
         ('description', ),
