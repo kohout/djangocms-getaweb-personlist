@@ -17,15 +17,15 @@
      <img class="pull-right modal-main-image" src="{{ object.image|thumbnail_url:'normal' }}" alt="{{ object.name }}" original="{{ object.image|thumbnail_url:'normal' }}">
     {% endif %}
 
+    {% if object.teams.count %}
     <b>Teams:</b>
-    <ul>
     {% for team in object.teams.all %}
-        <li>{{ team.name }}</li>
+        {% if not forloop.first %}, {% endif %}{{ team.name }}<br>
     {% endfor %}
-    </ul>
+    {% endif %}
 
     {% if object.position %}<b>Position:</b> {{ object.position }}<br />{% endif %}
-    {% if object.city %}<b>City:</b> {{ object.city }}<br />{% endif %}
+    {% if object.city %}<b>Stadt:</b> {{ object.city }}<br />{% endif %}
     {% if object.www %}<b>WWW:</b> {{ object.www }}<br />{% endif %}
     {% if object.hobbies %}<b>Hobbies:</b> {{ object.hobbies }}<br />{% endif %}
     {% if object.quote %}<b>Quote:</b> {{ object.quote }}<br />{% endif %}

@@ -74,6 +74,9 @@ class ImageMixin(models.Model):
 
 
 class Team(ImageMixin, models.Model):
+    is_active = models.BooleanField(
+        default=False,
+        verbose_name=u'aktiv')
     parent = models.ForeignKey(
         'self',
         blank=True,
