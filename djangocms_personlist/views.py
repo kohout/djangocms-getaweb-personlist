@@ -14,6 +14,7 @@ class TeamListView(ListView):
 
     def get_queryset(self):
         q = super(TeamListView, self).get_queryset()
+        q = q.filter(active=True)
         return self.filter_class(self.request.GET, q)
 
     def get_context_data(self, **kwargs):
@@ -32,7 +33,5 @@ class PersonDetailView(DetailView):
     """
     Detail view of a personlist item
     """
-    model = Person
     template_name = 'djangocms_personlist/person_detail.html'
-
-
+    queryset = Person.objects.filter(active=True)
