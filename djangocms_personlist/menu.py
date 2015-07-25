@@ -25,4 +25,4 @@ class TeamsMenu(CMSAttachMenu):
             nodes.append(node)
         return nodes
 
-menu_pool.register_menu(TeamsMenu)
+# menu_pool.register_menu(TeamsMenu)

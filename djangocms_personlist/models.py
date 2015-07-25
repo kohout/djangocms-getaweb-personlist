@@ -244,7 +244,7 @@ class Person(ImageMixin, models.Model):
         return self.name
 
     class Meta:
-        ordering = ('last_name', )
+        ordering = ('first_name', 'last_name', )
         verbose_name = _('Person')
         verbose_name_plural = _('Persons')
 
