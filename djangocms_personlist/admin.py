@@ -47,8 +47,8 @@ class MembershipInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 0
 
 class PersonAdmin(PreviewMixin, admin.ModelAdmin):
-    search_fields = ('first_name', 'last_name', 'position', )
-    list_display = ('render_preview', 'first_name', 'last_name', 'position', 'active')
+    search_fields = ('first_name', 'last_name', 'position', 'get_sites', )
+    list_display = ('render_preview', 'first_name', 'last_name', 'position', 'get_sites', 'active')
     list_display_links = ('render_preview', 'first_name', 'last_name', )
     fields = (
         ('active', ),
@@ -58,8 +58,12 @@ class PersonAdmin(PreviewMixin, admin.ModelAdmin):
         ('hobbies', ),
         ('abstract', ),
         ('phone', 'email', ),
+        ('sites', ),
     )
     inlines = [MembershipInline, PersonImageInline]
+
+    def get_sites(self, obj):
+        return "\n".join([s.name for s in obj.sites.all()])
 
 class TeamAdmin(PreviewMixin, MPTTModelAdmin):
     list_display = ('is_active', 'render_preview', 'name', )

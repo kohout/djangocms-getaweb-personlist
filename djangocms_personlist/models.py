@@ -1,10 +1,13 @@
 from cms.models.pluginmodel import CMSPlugin
+from cms.models.pagemodel import Site
 from django.db import models
+from django.db.models.query_utils import Q
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+
 import mptt
 import settings
 
@@ -122,6 +125,11 @@ class PersonListPluginModel(CMSPlugin):
         choices=DJANGOCMS_PERSONLIST_TEMPLATES,
         verbose_name=_(u'Layout'))
 
+    def get_persons(self, selected_team, current_site):
+        p = selected_team.team_person.filter(active=True)
+        p = p.filter(Q(sites=None)) | current_site.person_set.all()
+        return p
+
     class Meta:
         verbose_name = _(u'Person List Plugin')
         verbose_name_plural = _(u'Person List Plugins')
@@ -150,6 +158,12 @@ class Person(ImageMixin, models.Model):
         through=Membership,
         related_name='team_person',
         verbose_name=_(u'Assigned Teams'))
+    sites = models.ManyToManyField(
+        Site,
+        blank=True, null=True,
+        help_text=_(u'Person is associated with a certain site.'),
+        verbose_name=_(u'Site'))
+
     title = models.CharField(
         max_length=20,
         null=True,
