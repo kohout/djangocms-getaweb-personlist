@@ -24,6 +24,7 @@ class TeamListView(ListView):
         q = super(TeamListView, self).get_queryset()
         q = q.filter(active=True)
         q = q.filter(Q(sites=None)) | current_site.person_set.all()
+        q = q.distinct()
         return self.filter_class(self.request.GET, q)
 
     def get_context_data(self, **kwargs):

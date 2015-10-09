@@ -42,7 +42,7 @@
                         {% for team in person.teams.all %}
                             {{ team.name }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}<br />{% endif %}
-                    {% if person.position %}Position: {{ person.position }}{% endif %}
+                    {% if person.position %}{{ person.position }}{% endif %}
                 </div>
             </div>
     {% endfor %}
